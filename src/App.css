@@ -7,5 +7,23 @@
   align-items: center;
 }
 .chart {
-  width: 1000px;
+  width: 90%;
+  height: 400px;
+
+}
+
+.container_mine {
+  background-color: red;
+}
+.background-chart{
+  background-color:#0E1227 ;
+}
+.background-ul {
+  background-color: #1A1E36;
+}
+.green-feel {
+  color: "#01A3A4"
+}
+.red-feel {
+  color: "#FC427B"
 }
