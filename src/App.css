@@ -5,25 +5,75 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  direction: rtl;
+  font-size: 12px;
 }
 .chart {
   width: 90%;
-  height: 400px;
 
 }
 
-.container_mine {
-  background-color: red;
+.color-white {
+  color:white
 }
 .background-chart{
-  background-color:#0E1227 ;
+  background: rgb(14,18,39);
+  background: linear-gradient(90deg, rgba(14,18,39,1) 0%, rgba(43,46,70,1) 80%, rgba(55,58,82,1) 100%);
 }
 .background-ul {
   background-color: #1A1E36;
 }
 .green-feel {
-  color: "#01A3A4"
+  color: #01A3A4;
 }
 .red-feel {
-  color: "#FC427B"
+  color: #FC427B;
+
+}
+.color-amount {
+  color: #626999;
+
+}
+.items-scroll {
+  direction: rtl;
+}
+.items-scroll span {
+  direction: ltr;
+}
+
+.Analysis_container {
+  padding: 15px 10px;
+}
+  /* width */
+.items-scroll::-webkit-scrollbar {
+  width: 3px;
+  position: absolute;
+  left: 10px;
+  top:10px;
+}
+
+/* Track */
+.items-scroll::-webkit-scrollbar-track {
+  height: 10px;
+  background: #2C3049;
+  /* box-shadow: inset 0 0 5px grey; */
+  border-radius: 5px;
+  
+}
+
+/* Handle */
+.items-scroll::-webkit-scrollbar-thumb {
+  background-color: #626999;
+  border-radius: 5px;
+  height: 10px;
+}
+
+.Container-header {
+  /* background-color: red; */
+  height: 50px;
+}
+.analyze-header {
+  background-color: #626999;
+  width: 17px;
+  height: 17px;
 }

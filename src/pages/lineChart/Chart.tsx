@@ -2,17 +2,20 @@ import React from 'react';
 import ReactEcharts from "echarts-for-react";
 
 function Chart() {
-  let first = 70
+  let first = 96
   let second = 100 - first
   let max = 300
   let threshold = 50
+  let one_last = 240
   const option = {
-    backgroundColor: "#0E1227",
+    // backgroundColor: "#0E1227",
+
     visualMap: {
-      top: 50,
-      right: 10,
+      show:false,
       seriesIndex : 0,
-      
+      emphasis: {
+      } ,
+      selectedMode  : false,
       pieces: [
         {
           gt: 0,
@@ -22,7 +25,12 @@ function Chart() {
         {
           gt: max * (first/100),
           color: '#AC3B2A'
-        }
+        },
+        first > 90 &&
+        {
+          gt: max * (first/100) ,
+          color: "transparent"
+        } 
       ],
       outOfRange: {
         color: '#999'
@@ -47,9 +55,10 @@ function Chart() {
         show : true,
         lineStyle : {
           color: ["#262D57"],
-          width : [1]
+          width : 1
         }
      },
+
 
     },
     yAxis: {
@@ -68,13 +77,22 @@ function Chart() {
     },
     series: [
       {
-        data: [150, 230, 20, 218, 35, 147, 260],
-        type: 'line'
+        data: [150, 230, 20, 288, 35, 147, one_last, 2*max*(first/100)-one_last],
+        type: 'line',
+        symbol :"none",
+        markPoint: {
+          data: [
+            max*(first/100) > 300 && { type: 'max', name: 'Max' },
+            { type: 'min', name: 'Min' }
+          ]
+        },
       },
       
       {
         name: 'Bing',
         markLine: {
+
+          symbol: 'none',
           data: [{name: 'hi', yAxis: threshold,
           lineStyle : {
             color: "#FB1A43",
@@ -114,11 +132,13 @@ function Chart() {
               barBorderRadius: [0, 0, 12 ,12 ]
           }
       },
+      z: 10,
         data: [0,0,0,0,0,0,0,300*(first/100)]
       },
       {
         name: 'sing',
         type: 'bar',
+        z: 10,
         stack: 'al',
         color:"#FB1A43",
         label : {show: false,
