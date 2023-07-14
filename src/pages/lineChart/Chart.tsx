@@ -2,11 +2,17 @@ import React from 'react';
 import ReactEcharts from "echarts-for-react";
 
 function Chart() {
-  let first = 96
+  let first = 89
   let second = 100 - first
   let max = 300
   let threshold = 50
   let one_last = 240
+  let data_mine = [];
+  if (max * (first / 100) > 300) {
+  data_mine.push({ type: 'max', name: 'Max' });
+  }
+  data_mine.push({ type: 'min', name: 'Min' });
+
   const option = {
     // backgroundColor: "#0E1227",
 
@@ -22,15 +28,18 @@ function Chart() {
           lte: threshold,
           color: '#93CE07'
         },
+        first < 90 ?
         {
           gt: max * (first/100),
-          color: '#AC3B2A'
-        },
-        first > 90 &&
+          color: "#AC3B2A"
+        }
+        : 
         {
           gt: max * (first/100) ,
           color: "transparent"
         } 
+        
+        
       ],
       outOfRange: {
         color: '#999'
@@ -81,10 +90,7 @@ function Chart() {
         type: 'line',
         symbol :"none",
         markPoint: {
-          data: [
-            max*(first/100) > 300 && { type: 'max', name: 'Max' },
-            { type: 'min', name: 'Min' }
-          ]
+          data: data_mine
         },
       },
       

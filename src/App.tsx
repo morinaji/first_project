@@ -20,9 +20,7 @@ function App() {
 
         </div> */}
 
-        <Container3 
-        // {...props_me}
-        />
+        <Container3/>
       </div>
 
     </div>
