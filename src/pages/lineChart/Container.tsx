@@ -1,6 +1,6 @@
 import React from 'react';
 import Chart from './Chart';
-import Analysis from '../../Components/Analysis';
+import Analysis from '../../components/Analysis';
 import {useState} from "react"
 import analysisItem from '../../models/analysisItem';
 import Header from './Header';

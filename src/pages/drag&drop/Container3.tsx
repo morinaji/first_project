@@ -21,12 +21,15 @@ interface state_int {
 }
 
 interface widgetInt {
+    index : number,
+    date:number,
     name: string,
     new: boolean,
     x: number,
     y: number,
     w: number,
-    h: number
+    h: number,
+
 }
 
 
@@ -41,24 +44,32 @@ let widgets_global: widgetInt[];
 let widget_list_global :string[];
 
 export default function Container3() {
+    let width = 4
+    let height = 15
     const [addclass, setAddClass] = useState<boolean>(false)
     const [flag, setFlag] = useState<boolean>(true)
 
     const [widgets, setWidgets] = useState<widgetInt[]>([
       {
+        index : 0,
+        date:86400,
         name: "widget1",
         new: false,
-        x: 3,
-        y: 2,
+        x: 0,
+        y: 0,
         w: 2,
-        h: 3
+        h: 3,
+
       }
     ])
     const [widgetsList, setWidgetsList] = useState<string[]>([
       "widget2",
       "widget3",
       "widget4",
-      "widget5"
+      "widget5",
+      "widget6",
+      "widget7",
+      "widget8"
     ])
     widgets_global = widgets;
     widget_list_global = widgetsList;
@@ -74,12 +85,15 @@ export default function Container3() {
           // y: Math.floor(i / 6) * y,
           // w: 2,
           // h: 3,
-          x: widgets[i]?.x,
+          index : widgets[i].index,
+          date:0,
+          x: (i*4)%12,
           y: widgets[i]?.y,
-          w: 4,
-          h: 15,
+          w: width,
+          h: height,
           i: i.toString(),
           name: widgets[i]?.name,
+
           // static: Math.random() < 0.05
         };
       });
@@ -88,10 +102,6 @@ export default function Container3() {
     useEffect(() => {
       const delay = 50; // Delay of 1000 milliseconds (1 second)
       const timer = setTimeout(() => {
-        // Code to run after the delay
-        console.log("Delayed code executed");
-        // You can access the updated state here
-        console.log("Updated state:", state);
       }, delay);
       setState(prevState => ({
         ...prevState,
@@ -172,10 +182,14 @@ export default function Container3() {
       };
     
       const onDrop = (layout : any, layoutItem : any, _event: any) => {
+
         // alert(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
         let newWidget = widgets.filter((item) => item.new === true)
         let oldWidgets = widgets.filter((item) => item.new !== true)
         let tempWidget = {
+          // index : Math.floor((((layoutItem.x * layoutItem.y)) + layoutItem.x)/width)*width,
+          index : Math.floor((( Math.floor((layoutItem.y+1) / height) * 12) + layoutItem.x)/width)*width,
+          date:newWidget[0]?.date,
           name : newWidget[0]?.name,
           new:true,
           x: layoutItem.x,
@@ -232,19 +246,58 @@ export default function Container3() {
 
 
 
-
+                  
                   let newWidget = widgets.filter((item) => item.new === true)
+                  // let repeated = widgets.filter((item) => item.index === (newWidget[0].x * newWidget[0].y) + newWidget[0].x )
                   let oldWidgets = widgets.filter((item) => item.new !== true)
+                  let today = new Date()
                   let tempWidget = {
+                    // index : Math.floor((( newWidget[0].y * newWidget[0].x) + newWidget[0].x)/width)*width,
+                    index : Math.floor((( Math.floor((newWidget[0].y+1) / height) * 12) + newWidget[0].x)/width)*width,
+                    date: 86400 -( today.getHours() * 3600 + today.getMinutes()*60 + today.getSeconds() ),
                     name : item,
                     new:false,
                     x: newWidget[0].x,
                     y : newWidget[0].y,
                     w : newWidget[0].w,
                     h : newWidget[0].h,
+
                   }
                   let newWidgets = [...oldWidgets , tempWidget]
-                  setWidgets(newWidgets)
+                  let new_widgets_end = newWidgets.sort((a, b) => a.date - b.date);
+                  let new_widgets = new_widgets_end.sort((a, b) => a.index - b.index);
+                  let new_widgets_new = new_widgets.map((element, i) => {
+                    return(
+                      {
+                        index : (i)*width,
+                        date: 86400 -( today.getHours() * 3600 + today.getMinutes()*60 + today.getSeconds() ),
+                        name : element.name,
+                        new:element.new,
+                        x: element.x,
+                        y : element.y,
+                        w : element.w,
+                        h : element.h,
+                        // index : Math.floor((( element.y * ((i)%(12/width))*width ) + ((i)%(12/width))*width)/width)*width,
+                      }
+                    )
+                  })
+    
+                  // let new_widgets_last = newWidgets.map((element, i) => {
+                  //   return (
+                  //     {
+                  //       name : element.name,
+                  //       new: element.new,
+                  //       x: element.x,
+                  //       y : element.y,
+                  //       w : element.w,
+                  //       h : element.h,
+                  //       index : (newWidget[0].x * newWidget[0].y) + newWidget[0].x
+                  //       // index : Math.floor(newWidget.length/(12/newWidget[i].w))* element.h
+                  //     }
+                  //   )
+                  // })
+
+                  setWidgets(new_widgets_new)
                   setFlag(!flag)
                   setModalToggle(!modalToggle)
 
@@ -266,9 +319,7 @@ export default function Container3() {
                   widget_list_global = widgetsList;
                   widgets_global = widgets;
                   setState(prevState => ({ ...prevState }));
-                  // console.log("hi")
-                  // console.log(widgets_global)
-
+               
                      }
                   
                 }
