@@ -8,6 +8,10 @@
   /* direction: rtl; */
   font-size: 12px;
 }
+.container_test {
+  width: 1000px;
+  direction: rtl;
+}
 .chart {
   width: 90%;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-// import Container from './pages/lineChart/Container';
+import Container from './pages/lineChart/Container';
 import Container3 from './pages/drag&drop/Container3';
 
 function App() {
@@ -15,13 +15,18 @@ function App() {
 }
   return (
     <div className="App">
+      
+      {/* this is the chart 
       <div className='container_test'>
-        {/* <div className='modal'>
-
-        </div> */}
-
-        <Container3/>
+        <Container/>
+      </div> */}
+      <div className='container_test'>
+        <Container/>
       </div>
+
+      {/*  this is the react grid layout
+      <Container3/> */}
+      
 
     </div>
   );
