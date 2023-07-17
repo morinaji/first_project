@@ -20,13 +20,11 @@ function App() {
       <div className='container_test'>
         <Container/>
       </div> */}
-      <div className='container_test'>
-        <Container/>
-      </div>
+
 
       {/*  this is the react grid layout
       <Container3/> */}
-      
+      <Container3/>
 
     </div>
   );

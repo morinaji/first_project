@@ -6,6 +6,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import Chart from '../lineChart/Chart';
 import Container from '../lineChart/Container';
 import Testi from './Testi';
+import ModalWidget from '../../Components/ModalWidget';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 
@@ -225,11 +226,12 @@ export default function Container3() {
         <button onClick={onCompactTypeChange}>
           Change Compaction Type
         </button> */}
-        <div className={[modalToggle ? 'modal' : 'modal modal_invisible',addclass? "dispaly_none" : "" ].join(" ")}>
+        <div className={["grid grid-cols-3 gap-4 p-4",modalToggle ? 'modal' : 'modal modal_invisible',addclass? "dispaly_none" : "" ].join(" ")}>
            { widgetsList.map( item => ( 
                 <div
 
-                className="droppable-element"
+                // className="droppable-element"
+                className='bg-[#FAFAFA] rounded-[20px] flex p-5 items-center justify-between'
                 draggable={true}
                 unselectable="on"
                 // this is a hack for firefox
@@ -324,7 +326,15 @@ export default function Container3() {
                   
                 }
                 >
-                {item}
+                {/* <ModalWidget/> */}
+            
+                  <div className='bg-[black] w-[100px] h-[100px] rounded-lg'>
+
+                  </div>
+                  <div className='flex flex-col h-[80px] justify-between'>
+                      <span>سلام</span>
+                      <div className='bg-[blue] w-[40px] h-[40px] rounded-[50%]'> </div>
+                  </div>
                 </div>
 
               )
