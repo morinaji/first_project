@@ -91,24 +91,35 @@
 .testhala {
   direction: ltr;
 }
+
+
 .modal {
-  display: grid;
+  /* display: grid; */
   position: absolute;
-  width: 50%;
-  height: 60%;
+  /* width: 50%; */
   right:10%;
-  bottom:10%;
-  background-color: rgba(0, 0, 0, 0.7);
+  bottom:2%;
   z-index: 10;
   opacity: 1;
   transition: all 0.5s ease-in-out;
+  /* background: linear-gradient(0deg, #F8F8F8, #F8F8F8),
+linear-gradient(0deg, #FFFFFF, #FFFFFF); */
+  border: 1px solid #F8F8F8;
+  box-shadow: 0px 30px 20px 0px #0000001A;
+
 
 }
-.modal_invisible {
-  opacity: 0;
+
+.inside_modal {
+  opacity: 1;
   transition: all 0.5s ease-in-out;
 }
-.dispaly_none {
+.modal_invisible {
+  opacity: 0.5;
+  transition: all 0.5s ease-in-out;
+}
+
+.display_none {
   display: none;
 }
 
@@ -130,3 +141,23 @@
   width: 400px;
   height: 500px;
 } */
+
+
+.test_Cir {
+  /* margin: 25px 0; */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 10px solid transparent;
+  background-size: 100% 100%, 50% 50%, 50% 50%, 50% 50%, 50% 50%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(30deg, #F3565F 36%, #F3565F 30%),
+                    linear-gradient(120deg, #F3565F 39%,#AFAFAF 30%),
+                    /* linear-gradient(300deg, white 36%, white 30%), */
+                    linear-gradient(210deg, white 36%, white 30%);
+  background-position: center center, left top, right top, left bottom, right bottom;
+  background-origin: content-box, border-box, border-box, border-box, border-box;
+  background-clip: content-box, border-box, border-box, border-box, border-box;
+  /* transform: rotate(30deg); */
+}

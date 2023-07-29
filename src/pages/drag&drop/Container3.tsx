@@ -7,6 +7,7 @@ import Chart from '../lineChart/Chart';
 import Container from '../lineChart/Container';
 import Testi from './Testi';
 import ModalWidget from '../../Components/ModalWidget';
+import { TbFilterMinus } from 'react-icons/tb';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 
@@ -47,7 +48,7 @@ let widget_list_global :string[];
 export default function Container3() {
     let width = 4
     let height = 15
-    const [addclass, setAddClass] = useState<boolean>(false)
+    const [addclass, setAddClass] = useState<boolean>(true)
     const [flag, setFlag] = useState<boolean>(true)
 
     const [widgets, setWidgets] = useState<widgetInt[]>([
@@ -70,7 +71,9 @@ export default function Container3() {
       "widget5",
       "widget6",
       "widget7",
-      "widget8"
+      "widget8",
+      "widget9",
+      "widget10"
     ])
     widgets_global = widgets;
     widget_list_global = widgetsList;
@@ -205,6 +208,14 @@ export default function Container3() {
           setAddClass(true);
         }, 500);
       };
+      let widgets_names = [
+        "search",
+        "speed",
+        "publication",
+        "list",
+        "cloud",
+        "massage"
+      ]
     
   return (
     <div className=''>
@@ -226,12 +237,25 @@ export default function Container3() {
         <button onClick={onCompactTypeChange}>
           Change Compaction Type
         </button> */}
-        <div className={["grid grid-cols-3 gap-4 p-4",modalToggle ? 'modal' : 'modal modal_invisible',addclass? "dispaly_none" : "" ].join(" ")}>
-           { widgetsList.map( item => ( 
+        <div className={["flex flex-col justify-center items-center relative rounded-[3%] bg-[F8F8F8] p-[40px]",modalToggle ? 'modal' : 'modal modal_invisible',addclass? "display_none" : "" ].join(" ")}>
+
+          <div className='flex flex-col justify-center items-center'>
+              <div className='flex items-center justify-center'>
+                  <span className='text-[22px] font-[700]'>فیلترسازی گزارش ها</span>
+                  <div className='ml-[10px] border-[3px] rounded-[17%] border-[black] w-[23px] h-[23px] flex align-center justify-center text-[16px] flex align-center justify-center'>
+
+                    <TbFilterMinus/>
+                  </div>
+                 
+              </div>
+              <span className='mt-[5px] text-[#737373] text-[12px] font-[700]'>.چیدمان فیلترسازی گزارش ها را با استفاده از گزینه های زیر به دلخواه وارد نمائید</span>
+          </div>
+          <div className={['mt-[6px] w-[100%] h-[100%] grid grid-cols-3 gap-4 p-4 rounded-[3%] bg-[transparent] inside_modal',addclass? "display_none" : "inside_modal" ].join(" ")}>
+           { widgetsList.map( (item, numb)=> ( 
                 <div
 
                 // className="droppable-element"
-                className='bg-[#FAFAFA] rounded-[20px] flex p-5 items-center justify-between'
+                // className='bg-[#FAFAFA] rounded-[20px] flex p-5 items-center justify-between'
                 draggable={true}
                 unselectable="on"
                 // this is a hack for firefox
@@ -239,8 +263,12 @@ export default function Container3() {
                 // which we can do by adding this attribute
                 // @see https://bugzilla.mozilla.org/show_bug.cgi?id=568313
                 onDragStart={e => {
-                    // setModalToggle(!modalToggle)
+                    setModalToggle(false)
                     e.dataTransfer.setData("text/plain", "")
+                    setTimeout(() => {
+                      setAddClass(true);
+                    }, 500);
+
                     }
                     
                 }
@@ -301,7 +329,7 @@ export default function Container3() {
 
                   setWidgets(new_widgets_new)
                   setFlag(!flag)
-                  setModalToggle(!modalToggle)
+                  // setModalToggle(false)
 
                   // const temp = widgetsList.filter((listitem) => listitem !== item);
                   // setWidgetsList([...temp]);
@@ -326,20 +354,24 @@ export default function Container3() {
                   
                 }
                 >
-                {/* <ModalWidget/> */}
+                <ModalWidget type={widgets_names[numb]}/>
             
-                  <div className='bg-[black] w-[100px] h-[100px] rounded-lg'>
+                  {/* <div className='bg-[black] w-[100px] h-[100px] rounded-lg'>
 
                   </div>
                   <div className='flex flex-col h-[80px] justify-between'>
                       <span>سلام</span>
                       <div className='bg-[blue] w-[40px] h-[40px] rounded-[50%]'> </div>
-                  </div>
+                  </div> */}
                 </div>
-
+              
               )
 
             )}
+            </div>
+            <div className='mt-[7px] flex items-center justify-center bg-[#FFC9CC] rounded-[15px] text-[#F3565F] text-[12px] font-[700]  px-[30px] py-[5px]'>
+              <span>مشاهده همه</span>
+            </div>
            
           
         </div>

@@ -4,7 +4,7 @@ import ModalWidget from '../../Components/ModalWidget';
 function Modal() {
     return (
         <div>
-            <ModalWidget/>
+            
         </div>
     );
 }
